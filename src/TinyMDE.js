@@ -43,8 +43,14 @@ class Editor {
     }
 
     this.createEditorElement(element);
-    // TODO Placeholder for empty content
-    this.setContent(props.content || (this.textarea ? this.textarea.value : false) || '# Hello TinyMDE!\nEdit **here**');
+    if (typeof props.content === 'string') {
+      this.setContent(props.content);
+    } else
+    if (this.textarea) {
+      this.setContent(this.textarea.value || '');
+    } else {
+      this.setContent('');
+    }
   }
 
   /**
